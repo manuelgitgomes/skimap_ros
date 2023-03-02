@@ -1,0 +1,30 @@
+<launch>
+
+    <arg name="pc2_topic" default="/all_points" />
+
+    <node name="skimap_live_pc" output="screen" pkg="skimap_ros" type="skimap_live_pc">
+
+        <!-- Generic Parameters -->
+        <param name="hz" value="10" />
+
+        <!-- Topics Parameters -->
+        <param name="pc2_topic" value="$(arg pc2_topic)" />
+
+        <!-- Cloud parameters  -->
+        <param name="point_cloud_downscale" value="1" />
+
+        <!-- Mapping parameters -->
+        <param name="base_frame_name" value="world" />
+        <param name="map_resolution" value="0.1" />
+        <param name="min_voxel_weight" value="100" />
+        <param name="ground_level" value="0.05" />
+        <param name="agent_height" value="1.5" />
+        <param name="enable_chisel" value="true" />
+        <param name="chisel_step" value="30" />
+        <param name="height_color" value="true" />
+
+    </node>
+
+    <node pkg="rviz" type="rviz" output="screen" name="rviz" args="-d $(find skimap_ros)/rviz/skimap_live_pc.rviz" />
+
+</launch>
